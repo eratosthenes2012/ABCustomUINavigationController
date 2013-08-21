@@ -35,7 +35,7 @@
 }
 
 - (UIView *)createView
-{
+{   /* imageview embraced by a view */
     UIView *newView = [[UIView alloc] initWithFrame:self.frame];
     [self setTag:TAG_IMAGE_VIEW];
     [self setFrame:self.bounds];

@@ -51,7 +51,7 @@
     pushingVC=YES;
     
     if (animated) {
-        
+        /*ME :  get now showing viewcontroller */
         UIViewController *currentVC = [self visibleViewController];
         
         UIImageView *fromImageView = [currentVC.view imageInNavController:self];
@@ -64,7 +64,7 @@
         
         [self makeCubeAnimationFrom:fromImageView to:toImageView direction:self.cubeAnimationType withCompletion:^{
             
-            //Do the push
+            //Do the push， navigationStack is still managed by Apple. Andrés Brun does more work in view transition.
             [super pushViewController:viewController animated:NO];
             
             [currentVC.view setAlpha:1.0];
@@ -192,7 +192,7 @@
  */
 - (void) makeCubeAnimationFrom: (UIImageView *) fromImage to: (UIImageView *) toImage direction: (CubeAnimationType) animationType withCompletion: (void(^)(void))completion
 {
-    //We need to calculate the animation direcction
+    //We need to calculate the animation direcction, ME: pushingVC flags the direction
     int dir=pushingVC?1:-1;
     
     //We create a content view for do the translate animation

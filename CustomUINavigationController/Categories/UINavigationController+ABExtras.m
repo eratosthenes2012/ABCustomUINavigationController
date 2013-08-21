@@ -10,7 +10,7 @@
 
 @implementation UINavigationController (ABExtras)
 
-
+/* ME : height in portrait , then 对应变化后的 width in landscape ？  */
 - (float) calculateYPosition
 {
     float yPosition=0;

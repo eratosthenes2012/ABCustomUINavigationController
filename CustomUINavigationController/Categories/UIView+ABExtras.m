@@ -37,7 +37,7 @@
         colors = [[colors reverseObjectEnumerator] allObjects];
     }
     
-    //apply the colors and the gradient to the view
+    //apply the colors and the gradient to the view, startPoint: (0.5, 0.0), endPoint:(0.5, 1.0)
     gradient.colors = colors;
     
     [self.layer insertSublayer:gradient atIndex:[self.layer.sublayers count]];
@@ -57,10 +57,20 @@
 }
 
 - (UIImageView *) imageInNavController: (UINavigationController *) navController
-{
+{   /* ME: first to consider: */
     [self.layer setContentsScale:[[UIScreen mainScreen] scale]];
     
+    /* paras: size-- The size (measured in points) of the new bitmap context. 
+     * discussion: 
+     * The environment also uses the default coordinate system for UIKit views, where the origin is in the upper-left corner and the positive axes extend down and to the right of the origin. The supplied scale factor is also applied to the coordinate system and resulting images. The drawing environment is pushed onto the graphics context stack immediately.
+     
+     While the context created by this function is the current context, you can call the UIGraphicsGetImageFromCurrentImageContext function to retrieve an image object based on the current contents of the context. When you are done modifying the context, you must call the UIGraphicsEndImageContext function to clean up the bitmap drawing environment and remove the graphics context from the top of the context stack. You should not use the UIGraphicsPopContext function to remove this type of context from the stack.
+     
+     In most other respects, the graphics context created by this function behaves like any other graphics context. You can change the context by pushing and popping other graphics contexts. You can also get the bitmap context using the UIGraphicsGetCurrentContext function.
+     */
+    //ME:  convenient way to create a bitmap context, like defining a integer variable. 
     UIGraphicsBeginImageContextWithOptions(self.bounds.size, self.opaque, 1.0);
+    /* ME: layer drawn onto context */
     [self.layer renderInContext:UIGraphicsGetCurrentContext()];
     
     CGContextSetInterpolationQuality(UIGraphicsGetCurrentContext(), kCGInterpolationHigh);

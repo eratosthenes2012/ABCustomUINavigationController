@@ -217,6 +217,7 @@
     for (int col=0; col<SQUARE_COLUMNS; col++) {
         for (int row=0; row<SQUARE_ROWS; row++) {
             CGRect currentRect = CGRectMake(row*rowsWidth,col*columnsHeight,rowsWidth,columnsHeight);
+            /* ME : crop在这里 */
             UIView *fromView =[[fromImage createCrop:currentRect] createView];
             UIView *toView =[[toImage createCrop:currentRect] createView];
 
